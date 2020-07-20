@@ -1,29 +1,24 @@
 package com.thoughtworks.ab.repository;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
 import com.thoughtworks.ab.repository.entity.User;
 import com.thoughtworks.ab.viewmodel.UserRepository;
 import com.thoughtworks.ab.viewmodel.UserVO;
 
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+
 public class UserRepositoryImpl implements UserRepository {
-    private DataSource cacheUerDataSource;
-    private DataSource remoteUerDataSource;
+    private DataSource dbUserDataSource;
 
-    public UserRepositoryImpl(DataSource cacheUerDataSource, DataSource remoteUerDataSource) {
-        this.cacheUerDataSource = cacheUerDataSource;
-        this.remoteUerDataSource = remoteUerDataSource;
+    public UserRepositoryImpl(DataSource dbUserDataSource) {
+        this.dbUserDataSource = dbUserDataSource;
     }
 
-    public LiveData<UserVO> find(String userId) {
-        User user = cacheUerDataSource.find(userId);
-        MutableLiveData<UserVO> result = new MutableLiveData<>();
-        result.setValue(UserVO.fromModel(user));
-        return result;
+    public Maybe<User> find(String userId) {
+        return dbUserDataSource.find(userId);
     }
 
-    public void save(UserVO userVO) {
-        cacheUerDataSource.save(userVO.toModel());
+    public Completable save(UserVO userVO) {
+        return dbUserDataSource.save(userVO.toModel());
     }
 }

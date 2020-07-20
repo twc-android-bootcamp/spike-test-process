@@ -4,28 +4,26 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 
 import com.thoughtworks.ab.MainApplication;
+import com.thoughtworks.ab.repository.entity.User;
+
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
 
 public class UserProfileViewModel extends AndroidViewModel {
     private UserRepository userRepository;
 
     public UserProfileViewModel(@NonNull Application application) {
         super(application);
-        MainApplication mainApplication = (MainApplication) application;
-        userRepository = mainApplication.userRepository();
+        userRepository = ((MainApplication) application).userRepository();
     }
 
-    public LiveData<UserVO> findUser(String userId) {
+    public Maybe<User> findUser(String userId) {
         return userRepository.find(userId);
     }
 
-    public void save(String name, String lastName) {
-        UserVO user = new UserVO();
-        user.setId("123");
-        user.setName(name);
-        user.setLastName(lastName);
-        userRepository.save(user);
+    public Completable save(UserVO userVO) {
+        return userRepository.save(userVO);
     }
 }

@@ -2,8 +2,11 @@ package com.thoughtworks.ab.repository;
 
 import com.thoughtworks.ab.repository.entity.User;
 
-public interface DataSource {
-    User find(String userId);
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
 
-    void save(User user);
+public interface DataSource {
+    Maybe<User> find(String userId);
+
+    Completable save(User user);
 }

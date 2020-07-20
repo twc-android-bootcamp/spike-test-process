@@ -1,11 +1,12 @@
 package com.thoughtworks.ab.viewmodel;
 
-import androidx.lifecycle.LiveData;
-
 import com.thoughtworks.ab.repository.entity.User;
 
-public interface UserRepository {
-    LiveData<UserVO> find(String userId);
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
 
-    void save(UserVO userVO);
+public interface UserRepository {
+    Maybe<User> find(String userId);
+
+    Completable save(UserVO userVO);
 }

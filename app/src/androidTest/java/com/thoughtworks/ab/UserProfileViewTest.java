@@ -28,7 +28,7 @@ import static org.hamcrest.CoreMatchers.not;
 
 
 @RunWith(AndroidJUnit4.class)
-public class HelloWorldTest {
+public class UserProfileViewTest {
 
     @Rule
     public ActivityTestRule mActivityRule = new ActivityTestRule(MainActivity.class);
