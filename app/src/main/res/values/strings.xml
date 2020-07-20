@@ -13,4 +13,5 @@
     <string name="user_profile_fragment">Hello User Profile fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="save">保存</string>
+    <string name="shared_user_id">12345</string>
 </resources>

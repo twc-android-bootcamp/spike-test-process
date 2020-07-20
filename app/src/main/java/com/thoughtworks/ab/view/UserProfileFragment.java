@@ -1,24 +1,22 @@
 package com.thoughtworks.ab.view;
 
-import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.thoughtworks.ab.MainApplication;
 import com.thoughtworks.ab.R;
-import com.thoughtworks.ab.repository.entity.User;
 import com.thoughtworks.ab.viewmodel.UserProfileViewModel;
 import com.thoughtworks.ab.viewmodel.UserVO;
 
-import java.util.Objects;
 import java.util.Random;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -33,12 +31,16 @@ public class UserProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        userProfileViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(Objects.requireNonNull(getActivity()).getApplication())).get(UserProfileViewModel.class);
+        userProfileViewModel = new ViewModelProvider(this).get(UserProfileViewModel.class);
+        userProfileViewModel.setUserRepository(((MainApplication) getContext().getApplicationContext()).userRepository());
 
         view.findViewById(R.id.button_loading).setOnClickListener(v -> userProfileViewModel.findUser("123456789")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(
-                        result -> Toast.makeText(getContext(), result.toString(), Toast.LENGTH_SHORT).show()
+                        result -> {
+                            TextView textView = view.findViewById(R.id.textview_first);
+                            textView.setText(result.toString());
+                        }
                 ));
 
         view.findViewById(R.id.button_save).setOnClickListener(view1 -> {

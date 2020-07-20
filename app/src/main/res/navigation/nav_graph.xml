@@ -9,6 +9,5 @@
         android:id="@+id/UserProfileFragment"
         android:name="com.thoughtworks.ab.view.UserProfileFragment"
         android:label="@string/user_profile_fragment_label"
-        tools:layout="@layout/fragment_user_profile">
-    </fragment>
+        tools:layout="@layout/fragment_user_profile"></fragment>
 </navigation>

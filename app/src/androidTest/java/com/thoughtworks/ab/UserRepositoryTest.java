@@ -1,16 +1,12 @@
-
 package com.thoughtworks.ab;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.room.Room;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
-import androidx.test.rule.ActivityTestRule;
 
 import com.thoughtworks.ab.repository.AppDatabase;
 import com.thoughtworks.ab.repository.UserRepositoryImpl;
-import com.thoughtworks.ab.repository.entity.User;
-import com.thoughtworks.ab.view.MainActivity;
 import com.thoughtworks.ab.viewmodel.UserRepository;
 import com.thoughtworks.ab.viewmodel.UserVO;
 
