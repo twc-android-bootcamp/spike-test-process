@@ -51,8 +51,4 @@ public class UserProfileFragment extends Fragment {
             userProfileViewModel.save(userVO).subscribeOn(Schedulers.io()).subscribe();
         });
     }
-
-    public void setUserProfileViewModel(UserProfileViewModel userProfileViewModel) {
-        this.userProfileViewModel = userProfileViewModel;
-    }
 }
