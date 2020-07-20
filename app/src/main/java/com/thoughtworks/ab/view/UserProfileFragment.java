@@ -1,5 +1,6 @@
 package com.thoughtworks.ab.view;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -38,16 +39,11 @@ public class UserProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         userProfileViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(Objects.requireNonNull(getActivity()).getApplication())).get(UserProfileViewModel.class);
 
-        view.findViewById(R.id.button_loading).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                userProfileViewModel.findUser("123456789")
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread()).subscribe(
-                        result -> Toast.makeText(getContext(), result.toString(), Toast.LENGTH_SHORT).show()
-                );
-            }
-        });
+        view.findViewById(R.id.button_loading).setOnClickListener(v -> userProfileViewModel.findUser("123456789")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(
+                result -> Toast.makeText(getContext(), result.toString(), Toast.LENGTH_SHORT).show()
+        ));
 
         view.findViewById(R.id.button_save).setOnClickListener(view1 -> {
             UserVO userVO = new UserVO();
