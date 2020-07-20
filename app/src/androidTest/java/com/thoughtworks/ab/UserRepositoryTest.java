@@ -32,9 +32,6 @@ import static org.hamcrest.CoreMatchers.is;
 
 @RunWith(AndroidJUnit4.class)
 public class UserRepositoryTest {
-
-    @Rule
-    public ActivityTestRule mActivityRule = new ActivityTestRule(MainActivity.class);
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
