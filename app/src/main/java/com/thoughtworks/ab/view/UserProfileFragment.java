@@ -16,6 +16,8 @@ import com.thoughtworks.ab.MainApplication;
 import com.thoughtworks.ab.viewmodel.UserProfileViewModel;
 import com.thoughtworks.ab.viewmodel.UserVO;
 
+import java.util.Objects;
+
 public class UserProfileFragment extends Fragment {
     private UserProfileViewModel userProfileViewModel;
 
@@ -26,7 +28,7 @@ public class UserProfileFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        userProfileViewModel = new ViewModelProvider(this).get(UserProfileViewModel.class);
+        userProfileViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(Objects.requireNonNull(getActivity()).getApplication())).get(UserProfileViewModel.class);
 
         view.findViewById(R.id.button_loading).setOnClickListener(new View.OnClickListener() {
             @Override
