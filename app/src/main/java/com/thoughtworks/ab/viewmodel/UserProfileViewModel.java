@@ -14,6 +14,10 @@ import io.reactivex.Maybe;
 public class UserProfileViewModel extends AndroidViewModel {
     private UserRepository userRepository;
 
+    public UserProfileViewModel() {
+        super(null);
+    }
+
     public UserProfileViewModel(@NonNull Application application) {
         super(application);
         userRepository = ((MainApplication) application).userRepository();

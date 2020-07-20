@@ -21,13 +21,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.Random;
-import java.util.function.Predicate;
 
-import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
-
-import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
-import static org.hamcrest.CoreMatchers.is;
 
 
 @RunWith(AndroidJUnit4.class)

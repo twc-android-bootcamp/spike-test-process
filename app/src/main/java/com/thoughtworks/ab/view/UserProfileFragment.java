@@ -19,12 +19,7 @@ import com.thoughtworks.ab.viewmodel.UserVO;
 
 import java.util.Objects;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
-
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.internal.schedulers.ExecutorScheduler;
-import io.reactivex.internal.schedulers.SingleScheduler;
 import io.reactivex.schedulers.Schedulers;
 
 public class UserProfileFragment extends Fragment {
@@ -35,6 +30,7 @@ public class UserProfileFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_user_profile, container, false);
     }
 
+    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         userProfileViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(Objects.requireNonNull(getActivity()).getApplication())).get(UserProfileViewModel.class);
@@ -42,8 +38,8 @@ public class UserProfileFragment extends Fragment {
         view.findViewById(R.id.button_loading).setOnClickListener(v -> userProfileViewModel.findUser("123456789")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(
-                result -> Toast.makeText(getContext(), result.toString(), Toast.LENGTH_SHORT).show()
-        ));
+                        result -> Toast.makeText(getContext(), result.toString(), Toast.LENGTH_SHORT).show()
+                ));
 
         view.findViewById(R.id.button_save).setOnClickListener(view1 -> {
             UserVO userVO = new UserVO();
@@ -52,5 +48,9 @@ public class UserProfileFragment extends Fragment {
             userVO.setId("123456789");
             userProfileViewModel.save(userVO).subscribeOn(Schedulers.io()).subscribe();
         });
+    }
+
+    public void setUserProfileViewModel(UserProfileViewModel userProfileViewModel) {
+        this.userProfileViewModel = userProfileViewModel;
     }
 }
