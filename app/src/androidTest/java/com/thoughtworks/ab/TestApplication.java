@@ -1,7 +1,6 @@
 package com.thoughtworks.ab;
 
 import com.thoughtworks.ab.repository.UserRepositoryImpl;
-import com.thoughtworks.ab.viewmodel.UserProfileViewModel;
 import com.thoughtworks.ab.viewmodel.UserRepository;
 
 import static org.mockito.Mockito.mock;
