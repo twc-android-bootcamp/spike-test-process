@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.thoughtworks.ab.repository.UserRepositoryImpl;
+import com.thoughtworks.ab.repository.entity.User;
 import com.thoughtworks.ab.viewmodel.UserProfileViewModel;
 import com.thoughtworks.ab.viewmodel.UserRepository;
 import com.thoughtworks.ab.viewmodel.UserVO;
@@ -18,6 +19,11 @@ import org.junit.Test;
 import org.junit.rules.TestRule;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import io.reactivex.Maybe;
+import io.reactivex.MaybeEmitter;
+import io.reactivex.MaybeOnSubscribe;
+import io.reactivex.internal.operators.maybe.MaybeCreate;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -43,13 +49,13 @@ public class UserProfileViewModelUnitTest {
     @Test
     public void should_find_correct_user() {
         UserRepository userRepository = mock(UserRepositoryImpl.class);
-        UserVO userVO = new UserVO();
-        userVO.setName("sjyuan");
-        when(userRepository.find(anyString())).thenReturn(userVO);
+        User user = new User();
+        user.setName("sjyuan");
+        when(userRepository.find(anyString())).thenReturn(new MaybeCreate(emitter -> emitter.onSuccess(user)));
         when(application.userRepository()).thenReturn(userRepository);
         UserProfileViewModel userProfileViewModel = new UserProfileViewModel(application);
 
-        UserVO user = userProfileViewModel.findUser("123");
+        User result = userProfileViewModel.findUser("123").blockingGet();
 
         assertThat(user.getName(), is("sjyuan"));
     }
