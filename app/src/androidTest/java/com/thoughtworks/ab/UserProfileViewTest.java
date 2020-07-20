@@ -10,6 +10,7 @@ import androidx.test.rule.ActivityTestRule;
 
 import com.thoughtworks.ab.view.MainActivity;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +35,7 @@ public class UserProfileViewTest {
     public ActivityTestRule mActivityRule = new ActivityTestRule(MainActivity.class);
 
     @Test
+    @Ignore
     public void should_toast_correct_user() {
         onView(withId(R.id.button_loading)).perform(click());
         onView(withText("hello world")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
