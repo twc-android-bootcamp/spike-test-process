@@ -31,7 +31,7 @@ public class UserProfileViewTest {
 
     @Test
     public void should_display_correct_user_info() {
-        TestApplication applicationContext = (TestApplication) InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
+        MainApplication applicationContext = (MainApplication) InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
         UserRepository userRepository = applicationContext.userRepository();
         User user = new User();
         user.setId("123");

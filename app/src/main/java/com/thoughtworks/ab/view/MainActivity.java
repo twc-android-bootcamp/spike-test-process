@@ -14,10 +14,6 @@ import com.thoughtworks.ab.R;
 import com.thoughtworks.ab.viewmodel.UserProfileViewModel;
 
 public class MainActivity extends AppCompatActivity {
-
-    private UserProfileViewModel userProfileViewModel;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
